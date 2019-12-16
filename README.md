@@ -1,6 +1,6 @@
-# Common Utilities
+# Java Common Utilities
 
-Common utilities, like: logging
+Common utilities like logging, for Java(TM) applications.
 
 ## Logging
 
