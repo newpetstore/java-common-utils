@@ -33,7 +33,7 @@ publishing {
     repositories {
         maven {
             name 'gh-packages'
-            url 'https://maven.pkg.github.com/newpetstore'
+            url 'https://maven.pkg.github.com/newpetstore/java-common-utils'
             credentials {
                 username = 'fabiojose'
                 password = System.getenv('GH_TOKEN')
