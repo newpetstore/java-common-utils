@@ -6,7 +6,7 @@ plugins {
 }
 
 version = '1.0.0'
-group = 'common'
+group = 'petstore'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -33,7 +33,7 @@ publishing {
     repositories {
         maven {
             name 'gh-packages'
-            url 'https://maven.pkg.github.com/newpetstore/java-common-utils'
+            url 'https://maven.pkg.github.com/newpetstore/petstore'
             credentials {
                 username = 'fabiojose'
                 password = System.getenv('GH_TOKEN')
