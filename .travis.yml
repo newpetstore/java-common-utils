@@ -7,15 +7,36 @@ jdk:
 - openjdk9
 - openjdk10
 - openjdk11
-
 script:
-  - ./gradlew build --scan -s
-
+- "./gradlew build"
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+jobs:
+  include:
+  - stage: Publish to Github Packages
+    jdk: openjdk8
+    script: skip
+    deploy:
+      provider: script
+      script: "./gradlew clean build publish"
+      skip_cleanup: true
+      on:
+        tags: true
+  - stage: Github Release
+    jdk: openjdk8
+    script: skip
+    deploy:
+      provider: releases
+      api_key:
+        secure: hsORGfo5cZd1g8x/iRGB6bCxaPMHY+lH+USH0D362nNHb9LRa1EjaGRTWu3Z+4AdI2btbfTxMouWI6peTyLpvKdAoOope0bs4yxA9tM48OwYDMxTsHCaC2I7wAhrib8fFpq6KbfhjBjXY9WUxkmafqjMqcZIjRyuWMz6xz19BVQRJNhbOo3U2OSmjoGaNUpwq1xX0TRnarKlO43y/YBY1gs6z7Ag3OxQCYX4dpetBK+0u5r+shMdgPgBBsE5yUDM+BQzzcvAaqLW0YQA3uzI6c94szKZgPLQZ3+GkBh9pRT5XJMCZ1K+is0UqRHH/Nv4gYP3FBPvF8Fibbkk+FUCYrYOqg6UnwWASbdne9wctjlWCrfA+yzjJGvdeX/6NQoSD2OzjaWAwMf2Ari1wOSndWbsLhYou2hrKfycwcDIFjIur6TjiaRFwWcuLlurYGhNzIZ4I4nLJ3+JRAjcHUHa8NEmyCEL1RylWA98KH5+qTpE2O4POS5+YbsqqHzFvwzB2IPjmgKkMWSyQb8eFpmfYjzGiDohKCO+lvdegHpl77mjFJKJgU92r/zLznXVeM48kgA0NmBM+1HbndwQLFTkxdtxDef4iK1JhEBY4CQtDheWNMIze9yoaVkcOznR16VN9bwHCrt5Zvi0m1o16J6627ljsZGZI0r1Sj4PWrDlfhE=
+      skip_cleanup: true
+      on:
+        tags: true
+env:
+  global:
+    secure: NRNxWGMc3xThiu/yLJehV2p3VZcUh9Hmg6IqR+2uKQLAvpD7OcR5M4SM02sDxcyUcwss3QGU9AizlRVV2mgLsMHq11HhtwzP0C/h59FtuAKF+M6OkFHNYSuSAfmjXBZAj77wbu6IQkqnDSMixrid9dcp8Qlb6qL6Brx1q+aLba9NSaSKdxVSYRhujXCnry0++gmimo53e7hV/dGMnlCpkoXTlpX/MoR0ZPbWX9ZOaGMuCRyofmi5tyeYumffwgiPrJ3/nKsqAgUAZ6RjQPRyhi9htKLB8G2rMhcp5mqTFJDteTrhu3R3O9Xb7HG1v7kIgQyjyi1E69QCFRmzQ88m3HUntQ1jRdSqyNa5zQs+HjH2iLIde/5J1s/57Bo95aI+OUNEjUzJfmqR/u8SVHQ9TyIjodcWGxhgTq4DmOboQgfmWVD8zYn0dAzxBCHynfFZiTEI3dPngDjPk/ulRS9UCuead3BxiOm6pujBZCvp6rFflnuzUiYchF/I8WCJruDptGyKUSjFV5Ub/wImpMwY3fCE7Hn3gIiMC4/ZdRx6NlHII+uGjb2of5eUXc+qIeABDqwwshLvA5/19T7U2/hlwpB8yxsLVWU2c+87yDQi4M6fefWJNMsFu/04qsM2tT+9aboyC907XKqJwN3ze7UBuAcMovBaok+4Or7TdolEJZ8=
