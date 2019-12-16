@@ -33,10 +33,11 @@ publishing {
     repositories {
         maven {
             name 'gh-packages'
-            url "https://maven.pkg.github.com/newpetstore"
+            url 'https://maven.pkg.github.com/newpetstore'
             credentials {
-                username 'fabiojose'
-                password '$System.env.GH_TOKEN'
-            }}
+                username = 'fabiojose'
+                password = System.getenv('GH_TOKEN')
+            }
+        }
     }
 }
