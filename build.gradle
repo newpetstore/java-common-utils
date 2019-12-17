@@ -2,11 +2,12 @@
 plugins {
     id 'java-library'
     id 'eclipse'
+    id 'maven'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.7'
+    id 'com.jfrog.bintray' version '1.8.4'
 }
 
-version = '1.0.3'
+version = '1.0.5'
 group = 'petstore'
 sourceCompatibility = '1.8'
 
@@ -34,7 +35,7 @@ dependencies {
 
 publishing {
     publications {
-        maven(MavenPublication) {           
+        maven(MavenPublication) {
             from components.java
         }
     }
