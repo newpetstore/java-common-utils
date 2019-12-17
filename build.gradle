@@ -6,7 +6,7 @@ plugins {
     id 'com.jfrog.bintray' version '1.7'
 }
 
-version = '1.0.2'
+version = '1.0.3'
 group = 'petstore'
 sourceCompatibility = '1.8'
 
